@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
 
 export const App = () => {
+  // 未完了のTodo
+  const [inCompleteTodos, setInCompleteTodos] = useState([
+    "JavaScript Todo",
+    "React Todo"
+  ]);
   return (
     <React.Fragment>
       {/* 入力エリア */}
@@ -13,11 +18,16 @@ export const App = () => {
       <div className="incomplete-area">
         <p className="title">未完了のTodo</p>
         <ul>
-          <div className="list-row">
-            <li>something Incomplete Todo</li>
-            <button>完了</button>
-            <button>削除</button>
-          </div>
+          {inCompleteTodos.map((todo) => {
+            return (
+              // 変更の差分を検知するために付ける一意のkey
+              <div key={todo} className="list-row">
+                <li>{todo}</li>
+                <button>完了</button>
+                <button>削除</button>
+              </div>
+            );
+          })}
         </ul>
       </div>
       {/* 完了エリア */}
