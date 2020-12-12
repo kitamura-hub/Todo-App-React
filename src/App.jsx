@@ -28,7 +28,17 @@ export const App = () => {
   const onClickDelete = (index) => {
     const newTodos = [...inCompleteTodos];
     newTodos.splice(index, 1); // splice(インデックス, 指定したインデックスからいくつ削除するのか)
-    setInCompleteTodos(newTodos); //更新
+    setInCompleteTodos(newTodos); //未完了のTodoの更新
+  };
+
+  // 完了ボタン
+  const onClickComplete = (index) => {
+    const newInCompleteTodos = [...inCompleteTodos];
+    newInCompleteTodos.splice(index, 1);
+
+    const newCompleteTodos = [...completeTodos, inCompleteTodos[index]]; //現在の「完了のTodo」の中身, 完了ボタンを押された配列のインデックス
+    setInCompleteTodos(newInCompleteTodos); //未完了のTodoの更新
+    setCompleteTodos(newCompleteTodos); //完了のTodoの更新
   };
 
   return (
@@ -51,7 +61,7 @@ export const App = () => {
               // 変更の差分を検知するために付ける一意のkey
               <div key={todo} className="list-row">
                 <li>{todo}</li>
-                <button>完了</button>
+                <button onClick={() => onClickComplete(index)}>完了</button>
                 <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
             );
