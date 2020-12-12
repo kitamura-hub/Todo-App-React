@@ -5,5 +5,4 @@
 <img src="img/Todo-list.png">
 
 <br />
-
-Replaced JavaScript with React
+<h2>[ replaced this repository ]( https://github.com/kitamura-hub/Todo-App-VanillaJS )  with react</h2>
