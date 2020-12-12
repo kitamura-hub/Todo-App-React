@@ -58,7 +58,14 @@ export const App = () => {
         todoText={todoText}
         onChange={onChangeTodoText}
         onClick={onClickAdd}
+        disabled={inCompleteTodos.length >= 5}
       />
+      {inCompleteTodos.length >= 5 && (
+        <p style={{ color: "red", textAlign: "center" }}>
+          You can register up to 5 todos. Let's digest.
+        </p>
+      )}
+
       {/* 未完了エリア */}
       <IncompleteTodos
         inCompleteTodos={inCompleteTodos}
