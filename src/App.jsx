@@ -5,12 +5,9 @@ export const App = () => {
   // 入力箇所のstate化
   const [todoText, setTodoText] = useState([""]);
   // 未完了のTodo
-  const [inCompleteTodos, setInCompleteTodos] = useState([
-    "JavaScript Todo",
-    "React Todo"
-  ]);
+  const [inCompleteTodos, setInCompleteTodos] = useState([]);
   // 完了のTodo
-  const [completeTodos, setCompleteTodos] = useState(["todos finished!!"]);
+  const [completeTodos, setCompleteTodos] = useState([]);
 
   // onChangeで変更された箇所がeventに渡ってくる。それをsetTodoTextに渡すことでvalueの値を変えている
   const onChangeTodoText = (event) => setTodoText(event.target.value);
@@ -39,6 +36,16 @@ export const App = () => {
     const newCompleteTodos = [...completeTodos, inCompleteTodos[index]]; //現在の「完了のTodo」の中身, 完了ボタンを押された配列のインデックス
     setInCompleteTodos(newInCompleteTodos); //未完了のTodoの更新
     setCompleteTodos(newCompleteTodos); //完了のTodoの更新
+  };
+
+  // 戻すボタン
+  const onClickBack = (index) => {
+    const newCompleteTodos = [...completeTodos];
+    newCompleteTodos.splice(index, 1);
+
+    const newIncompleteTodos = [...inCompleteTodos, completeTodos[index]];
+    setCompleteTodos(newCompleteTodos);
+    setInCompleteTodos(newIncompleteTodos);
   };
 
   return (
@@ -72,11 +79,11 @@ export const App = () => {
       <div className="complete-area">
         <p className="title">完了のTodo</p>
         <ul>
-          {completeTodos.map((todo) => {
+          {completeTodos.map((todo, index) => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
-                <button>戻す</button>
+                <button onClick={() => onClickBack(index)}>戻す</button>
               </div>
             );
           })}
