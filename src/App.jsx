@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { InputTodo } from "./components/InputTodo";
+import { IncompleteTodos } from "./components/IncompleteTodos";
+import { CompleteTodos } from "./components/CompleteTodos";
 import "./styles.css";
 
 export const App = () => {
@@ -51,44 +54,19 @@ export const App = () => {
   return (
     <React.Fragment>
       {/* 入力エリア */}
-      <div className="input-area">
-        <input
-          placeholder="Todoを入力"
-          value={todoText}
-          onChange={onChangeTodoText}
-        />
-        <button onClick={onClickAdd}>追加</button>
-      </div>
+      <InputTodo
+        todoText={todoText}
+        onChange={onChangeTodoText}
+        onClick={onClickAdd}
+      />
       {/* 未完了エリア */}
-      <div className="incomplete-area">
-        <p className="title">未完了のTodo</p>
-        <ul>
-          {inCompleteTodos.map((todo, index) => {
-            return (
-              // 変更の差分を検知するために付ける一意のkey
-              <div key={todo} className="list-row">
-                <li>{todo}</li>
-                <button onClick={() => onClickComplete(index)}>完了</button>
-                <button onClick={() => onClickDelete(index)}>削除</button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
+      <IncompleteTodos
+        inCompleteTodos={inCompleteTodos}
+        onClickComplete={onClickComplete}
+        onClickDelete={onClickDelete}
+      />
       {/* 完了エリア */}
-      <div className="complete-area">
-        <p className="title">完了のTodo</p>
-        <ul>
-          {completeTodos.map((todo, index) => {
-            return (
-              <div key={todo} className="list-row">
-                <li>{todo}</li>
-                <button onClick={() => onClickBack(index)}>戻す</button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
+      <CompleteTodos completeTodos={completeTodos} onClickBack={onClickBack} />
     </React.Fragment>
   );
 };
