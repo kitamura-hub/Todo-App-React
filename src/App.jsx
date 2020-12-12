@@ -6,7 +6,7 @@ import "./styles.css";
 
 export const App = () => {
   // 入力箇所のstate化
-  const [todoText, setTodoText] = useState([""]);
+  const [todoText, setTodoText] = useState("");
   // 未完了のTodo
   const [inCompleteTodos, setInCompleteTodos] = useState([]);
   // 完了のTodo
